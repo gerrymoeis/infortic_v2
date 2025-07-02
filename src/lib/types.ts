@@ -1,0 +1,155 @@
+export type Json = 
+  | string 
+  | number 
+  | boolean 
+  | null 
+  | { [key: string]: Json | undefined } 
+  | Json[]
+
+export type Database = {
+  public: {
+    Tables: {
+      beasiswa: {
+        Row: {
+          id: string
+          created_at: string
+          title: string
+          education_level: string
+          location: string
+          deadline_date: string
+          source_url: string
+          organizer: string | null
+          description: string | null
+          image_url: string | null
+          slug: string
+          booklet_url: string | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          title: string
+          education_level: string
+          location: string
+          deadline_date: string
+          source_url: string
+          organizer: string | null
+          description: string | null
+          image_url?: string | null
+          slug: string
+          booklet_url?: string | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          title?: string
+          education_level?: string
+          location?: string
+          deadline_date?: string
+          source_url?: string
+          organizer?: string | null
+          description?: string | null
+          image_url?: string | null
+          slug?: string
+          booklet_url?: string | null
+        }
+        Relationships: []
+      }
+      lomba: {
+        Row: {
+          id: string
+          created_at: string
+          title: string
+          organizer: string
+          participant: string
+          location: string
+          date_text: string
+          price_text: string
+          source_url: string
+          poster_url: string | null
+          slug: string
+          description: string
+          registration_url: string | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          title: string
+          organizer: string
+          participant: string
+          location: string
+          date_text: string
+          price_text: string
+          source_url: string
+          poster_url?: string | null
+          slug: string
+          description: string
+          registration_url?: string | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          title?: string
+          organizer?: string
+          participant?: string
+          location?: string
+          date_text?: string
+          price_text?: string
+          source_url?: string
+          poster_url?: string | null
+          slug?: string
+          description?: string
+          registration_url?: string | null
+        }
+        Relationships: []
+      }
+      magang: {
+        Row: {
+          id: string
+          created_at: string
+          title: string
+          company_name: string
+          location: string
+          duration: string
+          source_url: string
+          description: string
+          logo_image_url: string | null
+          slug: string
+          field: string | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          title: string
+          company_name: string
+          location: string
+          duration: string
+          source_url: string
+          description: string
+          logo_image_url?: string | null
+          slug: string
+          field?: string | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          title?: string
+          company_name?: string
+          location?: string
+          duration?: string
+          source_url?: string
+          description?: string
+          logo_image_url?: string | null
+          slug?: string
+          field?: string | null
+        }
+        Relationships: []
+      }
+    }
+    Views: { [_ in never]: never }
+    Functions: { [_ in never]: never }
+    Enums: { [_ in never]: never }
+    CompositeTypes: { [_ in never]: never }
+  }
+}
+
+export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']

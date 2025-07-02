@@ -1,0 +1,24 @@
+# modules / dependencies
+node_modules
+
+# Local Netlify folder
+.netlify
+
+# Next.js build output
+.next
+
+# Coverage
+coverage
+
+# Jest
+jest.config.js
+
+# Netlify
+netlify-build.js
+
+# SWC
+.swc
+
+# Environment variables
+.env
+.env*.local
