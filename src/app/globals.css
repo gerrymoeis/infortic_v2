@@ -222,3 +222,15 @@
 .animate-float-particle {
   animation: float-particle 10s ease-in-out infinite;
 }
+
+.dark .description-content,
+.dark .description-content p,
+.dark .description-content li,
+.dark .description-content h1,
+.dark .description-content h2,
+.dark .description-content h3,
+.dark .description-content h4,
+.dark .description-content strong {
+  color: theme('colors.slate.200');
+}
+

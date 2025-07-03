@@ -6,6 +6,40 @@ export type Json =
   | { [key: string]: Json | undefined } 
   | Json[]
 
+export type Beasiswa = {
+  id: number;
+  created_at: string;
+  title: string;
+  description: string | null;
+  deadline_date: string;
+  education_level: string;
+  location: string;
+  image_url: string | null;
+  source_url: string | null;
+  booklet_url: string | null;
+  organizer: string | null;
+  slug: string;
+};
+
+export type Magang = {
+  id: number;
+  created_at: string;
+  intern_position: string;
+  company: string;
+  location: string;
+  description: string;
+  responsibilities: string;
+  criteria: string;
+  learning_outcome: string;
+  company_location: string;
+  detail_page_url: string;
+  company_page_url: string | null;
+  field: string | null;
+  logo_image_url: string | null;
+  slug: string;
+  contact_email: string | null;
+};
+
 export type Database = {
   public: {
     Tables: {

@@ -59,9 +59,7 @@ export async function generateMetadata({ searchParams }: LombaPageProps): Promis
   }
 }
 import { CompetitionSearchBar } from '@/components/ui/competition-search-bar'
-import { BackgroundElements } from '@/components/ui/background-elements'
-import { Navbar } from '@/components/layout/navbar'
-import { Search as SearchIcon, Filter, Sparkles } from 'lucide-react'
+import { Search as SearchIcon, Sparkles } from 'lucide-react'
 
 
 
@@ -123,8 +121,6 @@ export default async function LombaPage({ searchParams }: LombaPageProps) {
 
   return (
     <>
-      <BackgroundElements />
-      
       <div className="min-h-screen bg-background/25">
         <div className="container pt-24 pb-12">
           {/* Hero Section */}

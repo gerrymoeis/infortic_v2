@@ -4,6 +4,7 @@ import './globals.css'
 import { Footer } from '@/components/layout/footer'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { Navbar } from '@/components/layout/navbar'
+import { ConditionalBackground } from '@/components/layout/conditional-background'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -40,8 +41,9 @@ export default function RootLayout({
         >
           <div className="relative min-h-screen flex flex-col">
             {/* Navbar is now rendered inside each page as needed */}
+            <ConditionalBackground />
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main className="relative z-10 flex-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>

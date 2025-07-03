@@ -1,7 +1,41 @@
 // src/components/ui/background-elements.tsx
+'use client'
+
+import { useEffect, useState } from "react"
 import { Trophy, Medal, Award, Star, Crown, Sparkles } from "lucide-react"
 
+interface ParticleData {
+    id: number
+    width: number
+    height: number
+    top: number
+    left: number
+    duration: number
+    delay: number
+}
+
 export const BackgroundElements = () => {
+    const [particles, setParticles] = useState<ParticleData[]>([])
+    const [isHydrated, setIsHydrated] = useState(false)
+
+    useEffect(() => {
+        // Generate particles only on client side after hydration
+        const generateParticles = (): ParticleData[] => {
+            return Array.from({ length: 50 }, (_, i) => ({
+                id: i,
+                width: Math.random() * 3 + 1,
+                height: Math.random() * 3 + 1,
+                top: Math.random() * 100,
+                left: Math.random() * 100,
+                duration: Math.random() * 10 + 10,
+                delay: Math.random() * 5
+            }))
+        }
+
+        setParticles(generateParticles())
+        setIsHydrated(true)
+    }, [])
+
     return (
         <div className="fixed inset-0 -z-[1] overflow-hidden">
             {/* Main gradient sphere/globe effect */}
@@ -34,23 +68,25 @@ export const BackgroundElements = () => {
             {/* Subtle grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#8883_1px,transparent_1px),linear-gradient(to_bottom,#8883_1px,transparent_1px)] bg-[size:24px_24px] opacity-20" />
             
-            {/* Particle/dot effects */}
-            <div className="absolute inset-0">
-                {Array.from({ length: 50 }).map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute rounded-full bg-white opacity-[0.15]"
-                        style={{
-                            width: `${Math.random() * 3 + 1}px`,
-                            height: `${Math.random() * 3 + 1}px`,
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            animation: `float ${Math.random() * 10 + 10}s infinite ease-in-out`,
-                            animationDelay: `${Math.random() * 5}s`
-                        }}
-                    />
-                ))}
-            </div>
+            {/* Particle/dot effects - Only render after hydration */}
+            {isHydrated && (
+                <div className="absolute inset-0">
+                    {particles.map((particle) => (
+                        <div 
+                            key={particle.id}
+                            className="absolute rounded-full bg-white opacity-[0.15]"
+                            style={{
+                                width: `${particle.width}px`,
+                                height: `${particle.height}px`,
+                                top: `${particle.top}%`,
+                                left: `${particle.left}%`,
+                                animation: `float ${particle.duration}s infinite ease-in-out`,
+                                animationDelay: `${particle.delay}s`
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
             
             {/* Radial gradient overlay */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#44444415,transparent_50%),radial-gradient(ellipse_at_bottom,#44444415,transparent_50%)]" />

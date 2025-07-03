@@ -139,6 +139,23 @@ export const priceRanges = {
   '>200000': '> Rp 200.000'
 };
 
+export const magangFields = [
+  'Software Engineering',
+  'Data Science',
+  'UI/UX Design',
+  'Product Management',
+  'Marketing',
+  'Business Development'
+];
+
+export const magangLocations = [
+  'Jakarta',
+  'Bandung',
+  'Surabaya',
+  'Yogyakarta',
+  'Remote'
+];
+
 function parsePrice(priceText: string): number {
   if (!priceText) return -1; // -1 indicates not specified or not parseable
   const text = priceText.toLowerCase();

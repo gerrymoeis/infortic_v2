@@ -400,8 +400,166 @@ export async function getCompetitionById(id: string) {
 
     return data
   } catch (error) {
-    console.error('Error in getCompetitionById:', error)
+    console.error('Database Error fetching competition by ID:', error)
     return null
+  }
+}
+
+// --- MAGANG DATA FETCHING ---
+
+export async function getMagangTotalPages(
+  query: string,
+  field?: string,
+  location?: string
+) {
+  noStore();
+  const supabase = createClient();
+
+  try {
+    const { data, error } = await supabase.from('magang').select('*');
+
+    if (error) {
+      console.error('Database Error fetching total pages for magang:', error);
+      throw new Error('Failed to fetch total pages for magang.');
+    }
+
+    if (!data) return 0;
+
+    let filteredData = data.filter(item => {
+      const fieldMatch = field ? item.field?.includes(field) : true;
+      const locationMatch = location ? item.location?.includes(location) : true;
+      return fieldMatch && locationMatch;
+    });
+
+    if (query) {
+      const fuse = new Fuse(filteredData, {
+        keys: [
+          { name: 'intern_position', weight: 0.5 },
+          { name: 'company', weight: 0.3 },
+          { name: 'description', weight: 0.2 },
+        ],
+        threshold: 0.4,
+      });
+      filteredData = fuse.search(query).map(result => result.item);
+    }
+
+    return Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  } catch (error) {
+    console.error('Error in getMagangTotalPages:', error);
+    throw new Error('Failed to fetch total pages for magang.');
+  }
+}
+
+export async function getMagangTotalCount(
+  query: string,
+  field?: string,
+  location?: string
+) {
+  noStore();
+  const supabase = createClient();
+
+  try {
+    const { data, error } = await supabase.from('magang').select('*');
+
+    if (error) {
+      console.error('Database Error fetching total count for magang:', error);
+      throw new Error('Failed to fetch total count for magang.');
+    }
+
+    if (!data) return 0;
+
+    let filteredData = data.filter(item => {
+      const fieldMatch = field ? item.field?.includes(field) : true;
+      const locationMatch = location ? item.location?.includes(location) : true;
+      return fieldMatch && locationMatch;
+    });
+
+    if (query) {
+      const fuse = new Fuse(filteredData, {
+        keys: [
+          { name: 'intern_position', weight: 0.5 },
+          { name: 'company', weight: 0.3 },
+          { name: 'description', weight: 0.2 },
+        ],
+        threshold: 0.4,
+      });
+      filteredData = fuse.search(query).map(result => result.item);
+    }
+
+    return filteredData.length;
+  } catch (error) {
+    console.error('Error in getMagangTotalCount:', error);
+    throw new Error('Failed to fetch total count for magang.');
+  }
+}
+
+export async function getMagang(
+  query: string,
+  currentPage: number,
+  field?: string,
+  location?: string
+) {
+  noStore();
+  const supabase = createClient();
+
+  try {
+    const { data, error } = await supabase.from('magang').select('*');
+
+    if (error) {
+      console.error('Database Error fetching magang:', error);
+      throw new Error('Failed to fetch magang.');
+    }
+
+    if (!data) return [];
+
+    let filteredData = data.filter(item => {
+      const fieldMatch = field ? item.field?.includes(field) : true;
+      const locationMatch = location ? item.location?.includes(location) : true;
+      return fieldMatch && locationMatch;
+    });
+
+    if (query) {
+      const fuse = new Fuse(filteredData, {
+        keys: [
+          { name: 'intern_position', weight: 0.5 },
+          { name: 'company', weight: 0.3 },
+          { name: 'description', weight: 0.2 },
+        ],
+        threshold: 0.4,
+      });
+      filteredData = fuse.search(query).map(result => result.item);
+    }
+
+    const processedData = filteredData
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    return processedData.slice(offset, offset + ITEMS_PER_PAGE);
+
+  } catch (error) {
+    console.error('Error in getMagang:', error);
+    throw new Error('Failed to fetch magang.');
+  }
+}
+
+export async function getMagangBySlug(slug: string) {
+  noStore();
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase
+      .from('magang')
+      .select('*')
+      .eq('slug', slug)
+      .single();
+
+    if (error) {
+      return null;
+    }
+
+    return data as any;
+  } catch (error) {
+    console.error('Error in getMagangBySlug:', error);
+    throw new Error('Failed to fetch magang.');
   }
 }
 
