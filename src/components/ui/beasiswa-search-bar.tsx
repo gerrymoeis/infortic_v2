@@ -6,11 +6,16 @@ import { motion } from 'framer-motion'
 import { Search as SearchIcon, School, MapPin, X } from 'lucide-react'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { educationLevels } from '@/lib/utils'
+
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-export function BeasiswaSearchBar() {
+type BeasiswaSearchBarProps = {
+  educationLevels: string[];
+  beasiswaLocations: string[];
+};
+
+export function BeasiswaSearchBar({ educationLevels, beasiswaLocations }: BeasiswaSearchBarProps) {
   const searchParams = useSearchParams()
   const { replace } = useRouter()
   const pathname = usePathname()
@@ -91,7 +96,7 @@ export function BeasiswaSearchBar() {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">Semua Lokasi</SelectItem>
-          {scholarshipLocations.map((loc) => (
+          {beasiswaLocations.map((loc) => (
             <SelectItem key={loc} value={loc}>{loc}</SelectItem>
           ))}
         </SelectContent>

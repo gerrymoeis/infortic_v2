@@ -102,7 +102,8 @@ export default async function LombaDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="container mx-auto max-w-4xl px-4 py-12">
+      <div className="container mx-auto max-w-5xl py-12 px-4 sm:px-6 lg:px-8">
+      <article className="bg-card p-6 sm:p-8 rounded-2xl shadow-lg ring-1 ring-white/10">
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-1">
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg shadow-lg">
@@ -173,6 +174,7 @@ export default async function LombaDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: competition.description }}
         />
       </div>
+    </article>
     </div>
     </>
   );

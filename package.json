@@ -28,6 +28,7 @@
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.0",
     "fuse.js": "^7.1.0",
+    "idn-area-data": "^3.1.2",
     "lucide-react": "^0.323.0",
     "next": "^14.2.30",
     "next-themes": "^0.2.1",

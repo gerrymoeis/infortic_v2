@@ -1,4 +1,4 @@
-import { getCompetitions, getCompetitionsTotalPages, getCompetitionsTotalCount } from '@/lib/data'
+import { getCompetitions, getCompetitionsTotalPages, getCompetitionsTotalCount, getLombaParticipantCategories, getLombaPriceRanges } from '@/lib/data'
 import { CompetitionCard } from '@/components/ui/competition-card'
 import Pagination from '@/components/ui/pagination'
 import { CompetitionSkeleton } from '@/components/ui/competition-skeleton'
@@ -117,7 +117,9 @@ export default async function LombaPage({ searchParams }: LombaPageProps) {
   const participantCategory = searchParams?.participant || ''
   const priceRange = searchParams?.price || ''
 
-  const totalPages = await getCompetitionsTotalPages(query, participantCategory, priceRange)
+  const totalPages = await getCompetitionsTotalPages(query, participantCategory, priceRange);
+  const participantCategories = await getLombaParticipantCategories();
+  const priceRanges = await getLombaPriceRanges();
 
   return (
     <>
@@ -138,7 +140,10 @@ export default async function LombaPage({ searchParams }: LombaPageProps) {
 
           {/* Search and Filter Section */}
           <div className="mb-8">
-            <CompetitionSearchBar />
+            <CompetitionSearchBar 
+              participantCategories={participantCategories}
+              priceRanges={priceRanges}
+            />
           </div>
 
           {/* Competitions Grid */}

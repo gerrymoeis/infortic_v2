@@ -6,11 +6,19 @@ import { motion } from 'framer-motion'
 import { Search as SearchIcon, Users, CircleDollarSign, X } from 'lucide-react'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { participantCategories, priceRanges } from '@/lib/utils'
+
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-export function CompetitionSearchBar() {
+interface CompetitionSearchBarProps {
+  participantCategories: string[];
+  priceRanges: { key: string; label: string }[];
+}
+
+export function CompetitionSearchBar({ 
+  participantCategories,
+  priceRanges 
+}: CompetitionSearchBarProps) {
   const searchParams = useSearchParams()
   const { replace } = useRouter()
   const pathname = usePathname()
@@ -76,7 +84,7 @@ export function CompetitionSearchBar() {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">Semua Peserta</SelectItem>
-          {participantCategories.map((p) => (
+          {participantCategories.map((p: string) => (
             <SelectItem key={p} value={p}>{p}</SelectItem>
           ))}
         </SelectContent>
@@ -94,8 +102,8 @@ export function CompetitionSearchBar() {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">Semua Harga</SelectItem>
-          {Object.entries(priceRanges).map(([key, value]) => (
-            <SelectItem key={key} value={key}>{value}</SelectItem>
+          {priceRanges.map(({ key, label }) => (
+            <SelectItem key={key} value={key}>{label}</SelectItem>
           ))}
         </SelectContent>
       </Select>

@@ -1,4 +1,4 @@
-import { getMagang, getMagangTotalPages, getMagangTotalCount } from '@/lib/data'
+import { getMagang, getMagangTotalPages, getMagangTotalCount, getMagangFields, getMagangLocations } from '@/lib/data'
 import { MagangCard } from '@/components/ui/magang-card'
 import Pagination from '@/components/ui/pagination'
 import { MagangSkeleton } from '@/components/ui/magang-skeleton'
@@ -60,7 +60,7 @@ export async function generateMetadata({ searchParams }: MagangPageProps): Promi
 }
 
 import { MagangSearchBar } from '@/components/ui/magang-search-bar'
-import { Search as SearchIcon, Filter, Sparkles } from 'lucide-react'
+import { Search as SearchIcon, Sparkles } from 'lucide-react'
 
 async function MagangList({ 
   query, 
@@ -117,6 +117,8 @@ export default async function MagangPage({ searchParams }: MagangPageProps) {
   const location = searchParams?.location || ''
 
   const totalPages = await getMagangTotalPages(query, field, location)
+  const magangFields = await getMagangFields()
+  const magangLocations = await getMagangLocations()
 
   return (
     <>
@@ -139,7 +141,7 @@ export default async function MagangPage({ searchParams }: MagangPageProps) {
 
           {/* Search and Filter Section */}
           <div className="mb-8">
-            <MagangSearchBar />
+            <MagangSearchBar magangFields={magangFields} magangLocations={magangLocations} />
           </div>
 
           {/* Magang Grid */}

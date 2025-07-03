@@ -138,43 +138,58 @@ export type Database = {
       }
       magang: {
         Row: {
-          id: string
-          created_at: string
-          title: string
-          company_name: string
-          location: string
-          duration: string
-          source_url: string
-          description: string
-          logo_image_url: string | null
-          slug: string
-          field: string | null
+          id: number;
+          created_at: string;
+          intern_position: string;
+          company: string;
+          location: string;
+          description: string;
+          responsibilities: string;
+          criteria: string;
+          learning_outcome: string;
+          company_location: string;
+          detail_page_url: string;
+          company_page_url: string | null;
+          field: string | null;
+          logo_image_url: string | null;
+          slug: string;
+          contact_email: string | null;
         }
         Insert: {
-          id?: string
-          created_at?: string
-          title: string
-          company_name: string
-          location: string
-          duration: string
-          source_url: string
-          description: string
-          logo_image_url?: string | null
-          slug: string
-          field?: string | null
+          id?: number;
+          created_at?: string;
+          intern_position: string;
+          company: string;
+          location: string;
+          description: string;
+          responsibilities: string;
+          criteria: string;
+          learning_outcome: string;
+          company_location: string;
+          detail_page_url: string;
+          company_page_url?: string | null;
+          field?: string | null;
+          logo_image_url?: string | null;
+          slug: string;
+          contact_email?: string | null;
         }
         Update: {
-          id?: string
-          created_at?: string
-          title?: string
-          company_name?: string
-          location?: string
-          duration?: string
-          source_url?: string
-          description?: string
-          logo_image_url?: string | null
-          slug?: string
-          field?: string | null
+          id?: number;
+          created_at?: string;
+          intern_position?: string;
+          company?: string;
+          location?: string;
+          description?: string;
+          responsibilities?: string;
+          criteria?: string;
+          learning_outcome?: string;
+          company_location?: string;
+          detail_page_url?: string;
+          company_page_url?: string | null;
+          field?: string | null;
+          logo_image_url?: string | null;
+          slug?: string;
+          contact_email?: string | null;
         }
         Relationships: []
       }

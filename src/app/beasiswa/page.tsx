@@ -1,4 +1,4 @@
-import { getBeasiswa, getBeasiswaTotalPages, getBeasiswaTotalCount } from '@/lib/data'
+import { getBeasiswa, getBeasiswaTotalPages, getBeasiswaTotalCount, getBeasiswaEducationLevels, getBeasiswaLocations } from '@/lib/data'
 import { BeasiswaCard } from '@/components/ui/beasiswa-card'
 import Pagination from '@/components/ui/pagination'
 import { BeasiswaSkeleton } from '@/components/ui/beasiswa-skeleton'
@@ -60,7 +60,7 @@ export async function generateMetadata({ searchParams }: BeasiswaPageProps): Pro
 }
 
 import { BeasiswaSearchBar } from '@/components/ui/beasiswa-search-bar'
-import { Search as SearchIcon, Filter, Sparkles } from 'lucide-react'
+import { Search as SearchIcon, Sparkles } from 'lucide-react'
 
 async function BeasiswaList({ 
   query, 
@@ -117,6 +117,8 @@ export default async function BeasiswaPage({ searchParams }: BeasiswaPageProps) 
   const location = searchParams?.location || ''
 
   const totalPages = await getBeasiswaTotalPages(query, education, location)
+  const educationLevels = await getBeasiswaEducationLevels()
+  const beasiswaLocations = await getBeasiswaLocations()
 
   return (
     <>
@@ -136,7 +138,7 @@ export default async function BeasiswaPage({ searchParams }: BeasiswaPageProps) 
 
           {/* Search and Filter Section */}
           <div className="mb-8">
-            <BeasiswaSearchBar />
+            <BeasiswaSearchBar educationLevels={educationLevels} beasiswaLocations={beasiswaLocations} />
           </div>
 
           {/* Beasiswa Grid */}

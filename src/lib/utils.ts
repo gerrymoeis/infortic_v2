@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { createClient } from '@/lib/supabase/server'
  
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -86,126 +87,9 @@ export function parseRegistrationEndDate(dateText: string): Date | null {
   }
 }
 
-// --- Smart Filter Logic ---
 
-// 1. Participant Filter
-export const participantCategories = [
-  'Mahasiswa',
-  'Siswa SMA / Sederajat',
-  'Siswa SMP / Sederajat',
-  'Siswa SD / Sederajat',
-  'Umum',
-  'Gapyear',
-  'Lainnya'
-];
 
-export function checkParticipantCategory(participant: string, category: string): boolean {
-  if (!participant || !category) return false;
 
-  const p = participant.toLowerCase();
-  const c = category.toLowerCase();
-
-  if (c === 'mahasiswa') {
-    return p.includes('mahasiswa') || p.includes('d3') || p.includes('d4') || p.includes('s1');
-  }
-  if (c === 'siswa sma / sederajat') {
-    return p.includes('sma') || p.includes('smk');
-  }
-  if (c === 'siswa smp / sederajat') {
-    return p.includes('smp') || p.includes('mts');
-  }
-  if (c === 'siswa sd / sederajat') {
-    return p.includes('sd') || p.includes('mi');
-  }
-  if (c === 'umum') {
-    return p.includes('umum');
-  }
-  if (c === 'gapyear') {
-    return p.includes('gapyear');
-  }
-  if (c === 'lainnya') {
-    const allKeywords = ['mahasiswa', 'd3', 'd4', 's1', 'sma', 'smk', 'smp', 'mts', 'sd', 'mi', 'umum', 'gapyear'];
-    return !allKeywords.some(keyword => p.includes(keyword));
-  }
-  return false;
-}
-
-// 2. Price Filter
-export const priceRanges = {
-  'gratis': 'Gratis',
-  '1-50000': 'Rp 1 - Rp 50.000',
-  '50001-100000': 'Rp 50.001 - Rp 100.000',
-  '100001-200000': 'Rp 100.001 - Rp 200.000',
-  '>200000': '> Rp 200.000'
-};
-
-export const magangFields = [
-  'Software Engineering',
-  'Data Science',
-  'UI/UX Design',
-  'Product Management',
-  'Marketing',
-  'Business Development'
-];
-
-export const magangLocations = [
-  'Jakarta',
-  'Bandung',
-  'Surabaya',
-  'Yogyakarta',
-  'Remote'
-];
-
-function parsePrice(priceText: string): number {
-  if (!priceText) return -1; // -1 indicates not specified or not parseable
-  const text = priceText.toLowerCase();
-  if (text.includes('gratis') || text === '0') return 0;
-  
-  const numericString = text.replace(/[^\d]/g, '');
-  if (numericString) {
-    return parseInt(numericString, 10);
-  }
-  return -1;
-}
-
-// --- Beasiswa Filter Options ---
-export const educationLevels = [
-  'S1',
-  'S2',
-  'S3',
-  'D3',
-  'D4',
-  'SMA',
-  'SMP',
-  'Gap Year',
-  'Non-Degree',
-];
-
-export const scholarshipLocations = [
-  'Dalam Negeri',
-  'Luar Negeri',
-  'Online',
-];
-
-export function checkPriceInRange(priceText: string, range: string): boolean {
-  const price = parsePrice(priceText);
-  if (price === -1) return false; // Don't match items with unparseable prices
-
-  switch (range) {
-    case 'gratis':
-      return price === 0;
-    case '1-50000':
-      return price > 0 && price <= 50000;
-    case '50001-100000':
-      return price > 50000 && price <= 100000;
-    case '100001-200000':
-      return price > 100000 && price <= 200000;
-    case '>200000':
-      return price > 200000;
-    default:
-      return false;
-  }
-}
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
