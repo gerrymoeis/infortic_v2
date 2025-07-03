@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://www.infortic.id'; // Replace with your actual domain
+const BASE_URL = 'https://infortic.netlify.app'; // Replace with your actual domain
 
 export default function robots(): MetadataRoute.Robots {
   return {
