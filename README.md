@@ -4,6 +4,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14.x-black?logo=next.js)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-green?logo=supabase)](https://supabase.io/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-blue?logo=tailwind-css)](https://tailwindcss.com/)
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/infortic)
 
 ## 🚀 Project Overview
 
