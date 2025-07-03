@@ -1,4 +1,40 @@
+# ===================================================================
+# robots.txt for a Next.js application on Vercel
+# ===================================================================
+
+# Allow all reputable crawlers full access by default.
+# Specific disallows will be listed below.
 User-agent: *
 Allow: /
 
-Sitemap: https://your-domain.com/sitemap.xml
+# Block Next.js internal and development folders.
+# This saves crawl budget by preventing bots from crawling build artifacts.
+Disallow: /_next/
+Disallow: /api/
+
+# Block all site-search result pages.
+# These pages are low-value for SEO and can be seen as duplicate content.
+# The wildcard (*) covers all possible paths where a search could originate.
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /*?query=
+
+# -------------------------------------------------------------------
+
+# You can add rules for specific bots if needed, but the above is usually sufficient.
+# Example for Googlebot (often redundant if covered by *).
+User-agent: Googlebot
+Allow: /
+Disallow: /_next/
+Disallow: /api/
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /*?query=
+
+# -------------------------------------------------------------------
+
+# IMPORTANT: Provide the full path to your sitemap.
+# This is the most important directive for helping search engines discover your content.
+Sitemap: https://infortic.vercel.app/sitemap.xml

@@ -11,7 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://infortic.netlify.app'),
+  metadataBase: new URL('https://infortic.vercel.app'),
   title: 'Infortic - Portal Informasi Lomba Indonesia',
   description: 'Temukan informasi lomba, kompetisi, dan event terbaru untuk mahasiswa dan pelajar Indonesia.',
   keywords: 'lomba, kompetisi, mahasiswa, pelajar, indonesia, dicoding, event, himafortic, infortic, unesa, surabaya, puspresnas, gemastik, olivia',
@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   creator: 'Himafortic',
   publisher: 'Himafortic',
   robots: 'index, follow',
+
+  verification: {
+    google: 'yXfpuFCl7zavNIz23JXFZY6nfR6y9naUhp_Oey6jJTc',
+  }
 }
 
 export const viewport: Viewport = {
@@ -50,7 +54,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
-        
+
         <SpeedInsights />
       </body>
     </html>

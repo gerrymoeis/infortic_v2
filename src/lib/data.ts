@@ -926,8 +926,7 @@ export async function getMagangFields() {
   }
 }
 
-export async function getMagangLocations() {
-  
+export async function getMagangLocations(): Promise<string[]> {
   const supabase = buildSafeSupabase;
   
   try {
@@ -943,11 +942,45 @@ export async function getMagangLocations() {
     const locations = data.map(item => item.location).filter(Boolean) as string[];
     const uniqueLocations = [...new Set(locations)];
 
-    // Get all provinces from the package
-    const provinces = await getProvinces();
+    // For server-side, read the file directly from the file system
+    let provincesText: string;
+    
+    if (typeof window === 'undefined') {
+      // Server-side: read from file system
+      const fs = await import('fs');
+      const path = await import('path');
+      const filePath = path.join(process.cwd(), 'public', 'data', 'provinces.csv');
+      
+      try {
+        provincesText = fs.readFileSync(filePath, 'utf8');
+      } catch (fileError) {
+        console.error('Error reading CSV file:', fileError);
+        throw new Error('Failed to read provinces CSV file');
+      }
+    } else {
+      // Client-side: use fetch
+      const provincesResponse = await fetch('/data/provinces.csv');
+      if (!provincesResponse.ok) {
+        throw new Error(`Failed to fetch provinces CSV file: ${provincesResponse.status}`);
+      }
+      provincesText = await provincesResponse.text();
+    }
+
+    // Parse CSV data - skip header row and parse each line
+    const provincesLines = provincesText.split('\n').filter(line => line.trim() !== '');
+    
+    const provinces = provincesLines.slice(1) // Skip header row (code,name)
+      .map(line => {
+        const columns = line.split(',').map(col => col.trim().replace(/"/g, ''));
+        return {
+          code: columns[0] || '',
+          name: columns[1] || '', // Province name is in second column
+        };
+      })
+      .filter(province => province.name !== ''); // Remove empty entries
 
     // Filter provinces that match the locations in database
-    const matchingProvinces = provinces.filter(province => {
+    const matchingProvinces = provinces.filter((province: { code: string; name: string }) => {
       return uniqueLocations.some(location => 
         location.toUpperCase().includes(province.name.toUpperCase()) ||
         province.name.toUpperCase().includes(location.toUpperCase())

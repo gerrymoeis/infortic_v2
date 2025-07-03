@@ -16,7 +16,7 @@ Built with modern web technologies, this project aims to provide a fast, reliabl
 ### Website
 
 Check out the live website at:
-https://infortic.netlify.app
+https://infortic.vercel.app
 
 ---
 
@@ -36,7 +36,7 @@ https://infortic.netlify.app
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [Shadcn/ui](https://ui.shadcn.com/)
 - **Database & Backend:** [Supabase](https://supabase.io/)
-- **Deployment:** [Netlify](https://www.netlify.com/)
+- **Deployment:** [Vercel](https://vercel.com/)
 - **Icons:** [Lucide React](https://lucide.dev/)
 
 ---
@@ -86,7 +86,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ## 🚀 Deployment
 
-This project is configured for deployment on **Netlify**. To deploy, connect your GitHub repository to Netlify and configure the build settings. Ensure that you set the environment variables in the Netlify UI.
+This project is configured for deployment on **Vercel**. To deploy, connect your GitHub repository to Vercel and configure the build settings. Ensure that you set the environment variables in the Vercel UI.
 
 - **Build Command:** `npm run build`
 - **Publish Directory:** `.next`
