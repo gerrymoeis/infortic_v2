@@ -86,7 +86,7 @@ export function BeasiswaSearchBar({ educationLevels, beasiswaLocations }: Beasis
 
       <div className="h-6 border-l border-input"></div>
 
-      <Select
+      {/* <Select
         onValueChange={(value) => handleFilterChange('location', value)}
         value={searchParams.get('location') || 'all'}
       >
@@ -100,7 +100,7 @@ export function BeasiswaSearchBar({ educationLevels, beasiswaLocations }: Beasis
             <SelectItem key={loc} value={loc}>{loc}</SelectItem>
           ))}
         </SelectContent>
-      </Select>
+      </Select> */}
 
       {hasActiveFilters && (
         <Button onClick={handleReset} variant="ghost" size="icon" className="h-8 w-8 rounded-full">
