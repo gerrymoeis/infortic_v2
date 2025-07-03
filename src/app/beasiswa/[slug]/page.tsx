@@ -1,4 +1,4 @@
-import { getBeasiswaBySlug } from '@/lib/data';
+import { getBeasiswaBySlug, getAllBeasiswaSlugs } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,11 @@ import { CalendarDays, MapPin, ExternalLink, Briefcase, Download, Link as LinkIc
 import { formatDate, getDaysLeft } from '@/lib/utils';
 import { Metadata } from 'next';
 import Link from 'next/link';
+
+export async function generateStaticParams() {
+  const slugs = await getAllBeasiswaSlugs();
+  return slugs.map((s) => ({ slug: s.slug }));
+}
 
 type Props = {
   params: { slug: string };

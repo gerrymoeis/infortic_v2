@@ -998,3 +998,41 @@ export async function getDataBySlug(
     return null
   }
 }
+
+
+// --- SLUGS ---
+export async function getAllLombaSlugs(): Promise<{ slug: string }[]> {
+  noStore();
+  const supabase = createClient();
+  
+  const { data, error } = await supabase.from('lomba').select('slug');
+  if (error) {
+    console.error('Error fetching lomba slugs:', error);
+    return [];
+  }
+  return data || [];
+}
+
+export async function getAllBeasiswaSlugs(): Promise<{ slug: string }[]> {
+  noStore();
+  const supabase = createClient();
+  
+  const { data, error } = await supabase.from('beasiswa').select('slug');
+  if (error) {
+    console.error('Error fetching beasiswa slugs:', error);
+    return [];
+  }
+  return data || [];
+}
+
+export async function getAllMagangSlugs(): Promise<{ slug: string }[]> {
+  noStore();
+  const supabase = createClient();
+  
+  const { data, error } = await supabase.from('magang').select('slug');
+  if (error) {
+    console.error('Error fetching magang slugs:', error);
+    return [];
+  }
+  return data || [];
+}

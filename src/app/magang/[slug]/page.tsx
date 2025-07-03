@@ -1,4 +1,4 @@
-import { getMagangBySlug } from '@/lib/data';
+import { getMagangBySlug, getAllMagangSlugs } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Calendar, MapPin, Users, Tag, ArrowUpRight, Building, Briefcase, Target, BookOpen, Mail } from 'lucide-react';
@@ -6,6 +6,11 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Metadata } from 'next';
 import Script from 'next/script';
+
+export async function generateStaticParams() {
+  const slugs = await getAllMagangSlugs();
+  return slugs.map((s) => ({ slug: s.slug }));
+}
 
 type Props = {
   params: { slug: string };
