@@ -1,10 +1,18 @@
 import Fuse from 'fuse.js';
 import { createClient } from '@/lib/supabase/server';
-import { unstable_noStore as noStore } from 'next/cache';
-import type { Database, Tables } from '@/lib/types';
+import type { Tables } from '@/lib/types';
 import { parseRegistrationEndDate } from './utils';
 
 import { getProvinces } from 'idn-area-data';
+
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+
+// Build-safe client for generateStaticParams. This client does not use cookies
+// and is safe to use in build-time functions like generateStaticParams.
+const buildSafeSupabase = createSupabaseClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 type LombaTable = Tables<'lomba'>
 type BeasiswaTable = Tables<'beasiswa'>
@@ -172,8 +180,8 @@ export async function getCompetitionsTotalPages(
   participantCategory?: string,
   priceRange?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -226,8 +234,8 @@ export async function getCompetitionsTotalCount(
   participantCategory?: string,
   priceRange?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -281,8 +289,8 @@ export async function getCompetitions(
   participantCategory?: string,
   priceRange?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase.from('lomba').select('*');
@@ -344,8 +352,8 @@ export async function getCompetitions(
 }
 
 export async function getCompetitionBySlug(slug: string) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase
       .from('lomba')
@@ -365,8 +373,8 @@ export async function getCompetitionBySlug(slug: string) {
 }
 
 export async function getCompetitionById(id: string) {
-  noStore()
-  const supabase = createClient()
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase
       .from('lomba')
@@ -393,8 +401,8 @@ export async function getBeasiswaTotalPages(
   education?: string,
   location?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -445,8 +453,8 @@ export async function getBeasiswaTotalCount(
   education?: string,
   location?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -498,8 +506,8 @@ export async function getBeasiswa(
   education?: string,
   location?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -558,8 +566,8 @@ export async function getBeasiswa(
 }
 
 export async function getBeasiswaBySlug(slug: string) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase
       .from('beasiswa')
@@ -579,8 +587,8 @@ export async function getBeasiswaBySlug(slug: string) {
 }
 
 export async function getBeasiswaLocations() {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase.from('beasiswa').select('location');
     if (error) {
@@ -599,8 +607,8 @@ export async function getBeasiswaLocations() {
 }
 
 export async function getLombaParticipantCategories(): Promise<string[]> {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase.from('lomba').select('participant');
     if (error) {
@@ -625,8 +633,8 @@ export async function getLombaParticipantCategories(): Promise<string[]> {
 }
 
 export async function getLombaPriceRanges(): Promise<{ key: string; label: string }[]> {
-  // noStore();
-  // const supabase = createClient();
+  // 
+  // const supabase = buildSafeSupabase;
   // try {
   //   const { data, error } = await supabase.from('lomba').select('price_text');
   //   if (error) {
@@ -694,8 +702,8 @@ export async function getLombaPriceRanges(): Promise<{ key: string; label: strin
 }
 
 export async function getBeasiswaEducationLevels() {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   
   try {
     const { data, error } = await supabase
@@ -731,8 +739,8 @@ export async function getMagangTotalPages(
   field?: string,
   location?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -779,8 +787,8 @@ export async function getMagangTotalCount(
   field?: string,
   location?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase
@@ -828,8 +836,8 @@ export async function getMagang(
   field?: string,
   location?: string
 ) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
 
   try {
     const { data, error } = await supabase.from('magang').select('*');
@@ -878,8 +886,8 @@ export async function getMagang(
 }
 
 export async function getMagangBySlug(slug: string) {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase
       .from('magang')
@@ -899,8 +907,8 @@ export async function getMagangBySlug(slug: string) {
 }
 
 export async function getMagangFields() {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   try {
     const { data, error } = await supabase.from('magang').select('field');
     if (error) {
@@ -919,8 +927,8 @@ export async function getMagangFields() {
 }
 
 export async function getMagangLocations() {
-  noStore();
-  const supabase = createClient();
+  
+  const supabase = buildSafeSupabase;
   
   try {
     // Fetch locations from database
@@ -965,8 +973,8 @@ export async function getDataBySlug(
   table: 'lomba' | 'beasiswa' | 'magang', 
   slug: string
 ): Promise<LombaTable | BeasiswaTable | MagangTable | null> {
-  noStore()
-  const supabase = createClient()
+  
+  const supabase = buildSafeSupabase;
   try {
     let selectQuery = '*';
     switch (table) {
@@ -999,13 +1007,9 @@ export async function getDataBySlug(
   }
 }
 
-
 // --- SLUGS ---
 export async function getAllLombaSlugs(): Promise<{ slug: string }[]> {
-  noStore();
-  const supabase = createClient();
-  
-  const { data, error } = await supabase.from('lomba').select('slug');
+  const { data, error } = await buildSafeSupabase.from('lomba').select('slug');
   if (error) {
     console.error('Error fetching lomba slugs:', error);
     return [];
@@ -1014,10 +1018,7 @@ export async function getAllLombaSlugs(): Promise<{ slug: string }[]> {
 }
 
 export async function getAllBeasiswaSlugs(): Promise<{ slug: string }[]> {
-  noStore();
-  const supabase = createClient();
-  
-  const { data, error } = await supabase.from('beasiswa').select('slug');
+  const { data, error } = await buildSafeSupabase.from('beasiswa').select('slug');
   if (error) {
     console.error('Error fetching beasiswa slugs:', error);
     return [];
@@ -1026,10 +1027,7 @@ export async function getAllBeasiswaSlugs(): Promise<{ slug: string }[]> {
 }
 
 export async function getAllMagangSlugs(): Promise<{ slug: string }[]> {
-  noStore();
-  const supabase = createClient();
-  
-  const { data, error } = await supabase.from('magang').select('slug');
+  const { data, error } = await buildSafeSupabase.from('magang').select('slug');
   if (error) {
     console.error('Error fetching magang slugs:', error);
     return [];

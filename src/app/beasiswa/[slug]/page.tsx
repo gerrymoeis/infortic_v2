@@ -7,6 +7,8 @@ import { formatDate, getDaysLeft } from '@/lib/utils';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   const slugs = await getAllBeasiswaSlugs();
   return slugs.map((s) => ({ slug: s.slug }));

@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Metadata } from 'next';
 import Script from 'next/script';
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   const slugs = await getAllLombaSlugs();
   return slugs.map((s) => ({ slug: s.slug }));

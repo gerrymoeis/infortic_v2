@@ -5,6 +5,8 @@ import { CompetitionSkeleton } from '@/components/ui/competition-skeleton'
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 type LombaPageProps = {
   searchParams?: {
     query?: string

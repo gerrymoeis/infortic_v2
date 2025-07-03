@@ -6,9 +6,12 @@ import { ThemeProvider } from '@/providers/theme-provider'
 import { Navbar } from '@/components/layout/navbar'
 import { ConditionalBackground } from '@/components/layout/conditional-background'
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://infortic.netlify.app'),
   title: 'Infortic - Portal Informasi Lomba Indonesia',
   description: 'Temukan informasi lomba, kompetisi, dan event terbaru untuk mahasiswa dan pelajar Indonesia.',
   keywords: 'lomba, kompetisi, mahasiswa, pelajar, indonesia, dicoding, event, himafortic, infortic, unesa, surabaya, puspresnas, gemastik, olivia',
@@ -47,6 +50,8 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        
+        <SpeedInsights />
       </body>
     </html>
   )
