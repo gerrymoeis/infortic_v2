@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { FaInstagram, FaYoutube, FaTiktok } from 'react-icons/fa'
+import { FaInstagram, FaYoutube, FaTiktok, FaGlobe } from 'react-icons/fa'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -19,7 +19,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="col-span-1 md:col-span-1 space-y-4">
              <div className="flex items-center space-x-3">
-              <Link href="/" target="_blank">
+              <Link href="/" target="_blank" rel="noopener noreferrer">
               <Image
                 src="/images/himafortic-logo.png"
                 alt="Himafortic Logo"
@@ -34,7 +34,7 @@ export function Footer() {
                 <span className="text-2xl font-bold text-foreground">
                   Infortic
                 </span>
-                <p className="text-sm text-muted-foreground"><Link href="https://himafortic.mi.unesa.ac.id/" target="_blank" className="text-primary hover:text-secondary transition-colors duration-300">Himafortic</Link></p>
+                <p className="text-sm text-muted-foreground"><Link href="https://himafortic.mi.unesa.ac.id/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-secondary transition-colors duration-300">Himafortic</Link></p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -67,9 +67,10 @@ export function Footer() {
             <div>
               <h4 className="text-sm font-semibold text-foreground tracking-wider uppercase">Sosial</h4>
               <ul className="mt-4 space-y-2">
-                <li><Link href="https://www.instagram.com/himafortic_unesa/" target="_blank" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaInstagram className="h-4 w-4" /> Instagram</Link></li>
-                <li><Link href="https://www.youtube.com/@himaforticunesa1170" target="_blank" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaYoutube className="h-4 w-4" /> Youtube</Link></li>
-                <li><Link href="https://www.tiktok.com/@himafortic_unesa" target="_blank" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaTiktok className="h-4 w-4" /> Tiktok</Link></li>
+                <li><Link href="https://himafortic.mi.unesa.ac.id/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaGlobe className="h-4 w-4" /> Website</Link></li>
+                <li><Link href="https://www.instagram.com/himafortic_unesa/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaInstagram className="h-4 w-4" /> Instagram</Link></li>
+                <li><Link href="https://www.youtube.com/@himaforticunesa1170" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaYoutube className="h-4 w-4" /> Youtube</Link></li>
+                <li><Link href="https://www.tiktok.com/@himafortic_unesa" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center gap-2"><FaTiktok className="h-4 w-4" /> Tiktok</Link></li>
               </ul>
             </div>
           </div>

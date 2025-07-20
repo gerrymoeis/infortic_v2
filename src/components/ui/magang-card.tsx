@@ -22,6 +22,8 @@ export function MagangCard({ magang }: { magang: Magang }) {
               alt={`${magang.company} logo`}
               fill
               className="object-contain rounded-md"
+              placeholder="blur"
+              blurDataURL={magang.logo_image_url || '/images/placeholder-logo.png'}
             />
           </div>
           <div className="flex-grow">
@@ -65,7 +67,7 @@ export function MagangCard({ magang }: { magang: Magang }) {
       </CardContent>
       
       <CardFooter className="pt-4 mt-auto">
-        <Link href={`/magang/${magang.slug}`} target="_blank" className="w-full">
+        <Link href={`/magang/${magang.slug}`} target="_blank" rel="noopener noreferrer" className="w-full">
           <Badge className="w-full text-center justify-center py-3 h-11 text-base transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 bg-gradient-to-r from-primary via-secondary to-accent bg-[length:200%_auto] hover:bg-right text-white hover:text-primary hover:font-bold shadow-[0_4px_10px_rgba(79,70,229,0.3)] hover:shadow-[0_6px_20px_rgba(236,72,153,0.4)] cursor-pointer">
             <ExternalLink className="mr-2 h-5 w-5" />
             Lihat Detail

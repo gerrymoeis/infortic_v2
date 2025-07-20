@@ -25,6 +25,8 @@ export function BeasiswaCard({ beasiswa }: BeasiswaCardProps) {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
+            placeholder="blur"
+            blurDataURL={beasiswa.image_url || '/images/placeholder.webp'}
             priority={false}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -117,7 +119,7 @@ export function BeasiswaCard({ beasiswa }: BeasiswaCardProps) {
           <Link 
             href={`/beasiswa/${beasiswa.slug}`}
             className="flex items-center justify-center w-full"
-            target="_blank"
+            target="_blank" rel="noopener noreferrer"
           >
             <ExternalLink className="mr-2 h-5 w-5" />
             {daysLeft !== null && daysLeft < 0 ? 'Pendaftaran Ditutup' : 'Lihat Detail'}

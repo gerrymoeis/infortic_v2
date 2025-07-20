@@ -33,6 +33,8 @@ export function CompetitionCard({ competition }: { competition: TableDataMap['lo
           alt={`Poster ${competition.title}`}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-110"
+          placeholder="blur"
+          blurDataURL="/images/placeholder.jpg"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -140,7 +142,7 @@ export function CompetitionCard({ competition }: { competition: TableDataMap['lo
           <Link 
             href={`/lomba/${competition.slug}`}
             className="flex items-center justify-center w-full"
-            target="_blank"
+            target="_blank" rel="noopener noreferrer"
           >
             <ExternalLink className="mr-2 h-5 w-5" />
             {isExpired ? 'Lomba Berakhir' : 'Lihat Detail'}

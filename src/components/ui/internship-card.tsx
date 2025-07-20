@@ -25,6 +25,8 @@ export function InternshipCard({ internship }: InternshipCardProps) {
                 alt={`${internship.company_name} logo`}
                 fill
                 className="object-contain rounded-lg bg-white p-1 shadow-md"
+                placeholder="blur"
+                blurDataURL={internship.image_url || '/images/placeholder-internship.jpg'}
                 sizes="64px"
               />
           </div>
