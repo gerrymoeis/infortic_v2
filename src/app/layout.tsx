@@ -7,6 +7,9 @@ import { Navbar } from '@/components/layout/navbar'
 import { ConditionalBackground } from '@/components/layout/conditional-background'
 
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
+import Script from 'next/script'
+import { JsonLd } from '@/components/common/json-ld'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,8 +41,44 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="id" suppressHydrationWarning>
-      <body className={inter.className}>
+        <html lang="id" suppressHydrationWarning>
+      <head>
+        <JsonLd data={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          'name': 'Infortic',
+          'url': 'https://infortic.vercel.app',
+          'logo': 'https://infortic.vercel.app/images/logo.png',
+          'sameAs': [
+            'https://www.instagram.com/himafortic_unesa/',
+            'https://www.youtube.com/@himaforticunesa1170',
+            'https://www.tiktok.com/@himafortic_unesa'
+          ]
+        }} />
+        <JsonLd data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          'url': 'https://infortic.vercel.app',
+          'potentialAction': {
+            '@type': 'SearchAction',
+            'target': 'https://infortic.vercel.app/search?q={search_term_string}',
+            'query-input': 'required name=search_term_string',
+          },
+        }} />
+      </head>
+            <body className={inter.className}>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-K19R0CPLKS"></Script>
+        <Script id="google-analytics">
+          {
+            `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-K19R0CPLKS');
+            `
+          }
+        </Script>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -55,6 +94,7 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
 
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>

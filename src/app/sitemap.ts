@@ -23,10 +23,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     fetchSitemapEntries('magang'),
   ]);
 
-  const createUrls = (entries: { slug: string; created_at: string }[], path: string) => {
+  const createUrls = (entries: { slug: string; created_at: string }[], path: string): MetadataRoute.Sitemap => {
     return entries.map(({ slug, created_at }) => ({
       url: `${BASE_URL}/${path}/${slug}`,
       lastModified: new Date(created_at).toISOString(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
     }));
   };
 

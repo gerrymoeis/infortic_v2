@@ -6,6 +6,7 @@ import { CalendarDays, MapPin, ExternalLink, Briefcase, Download, Link as LinkIc
 import { formatDate, getDaysLeft } from '@/lib/utils';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { JsonLd } from '@/components/common/json-ld';
 
 export const revalidate = 3600;
 
@@ -59,7 +60,24 @@ export default async function BeasiswaDetailPage({ params }: Props) {
   const daysLeft = getDaysLeft(beasiswa.deadline_date);
   const formattedDeadline = formatDate(beasiswa.deadline_date);
 
+  const scholarshipJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalProgram',
+    name: beasiswa.title,
+    description: beasiswa.description?.replace(/<[^>]+>/g, '') || 'Informasi detail beasiswa.',
+    provider: {
+      '@type': 'Organization',
+      name: beasiswa.organizer,
+    },
+    applicationDeadline: beasiswa.deadline_date,
+    educationalLevel: beasiswa.education_level,
+    programType: 'Scholarship',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/beasiswa/${beasiswa.slug}`,
+  };
+
   return (
+    <>
+      <JsonLd data={scholarshipJsonLd} />
     <div className="container mx-auto max-w-5xl py-12 px-4 sm:px-6 lg:px-8">
       <article className="bg-card p-6 sm:p-8 rounded-2xl shadow-lg ring-1 ring-white/10">
         <header className="mb-8">
@@ -146,5 +164,6 @@ export default async function BeasiswaDetailPage({ params }: Props) {
         </div>
       </article>
     </div>
+    </>
   );
 }
