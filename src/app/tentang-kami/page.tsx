@@ -45,7 +45,7 @@ const missions = [
 export default function TentangKamiPage() {
   return (
     <div className="container mx-auto max-w-5xl py-12 px-4 sm:px-6 lg:px-8">
-      <article className="bg-card p-6 sm:p-8 rounded-2xl shadow-lg ring-1 ring-white/10">
+      <article className="bg-card p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
         <header className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
             Tentang Himafortic Unesa
@@ -71,7 +71,7 @@ export default function TentangKamiPage() {
             <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Misi Kami</h2>
             <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6">
               {missions.map((mission, index) => (
-                <div key={index} className="bg-background/50 p-6 rounded-lg ring-1 ring-white/10 text-center">
+                <div key={index} className="bg-background/50 p-6 rounded-lg border border-slate-200 dark:border-slate-800 text-center">
                   <h3 className="font-bold text-primary text-5xl mb-3">{index + 1}</h3>
                   <p className="text-muted-foreground">{mission}</p>
                 </div>
@@ -84,7 +84,7 @@ export default function TentangKamiPage() {
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Struktur Departemen</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {departments.map((dept) => (
-              <div key={dept.name} className="bg-background/50 p-4 rounded-lg ring-1 ring-white/10 flex flex-col items-center text-center transform transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30">
+              <div key={dept.name} className="bg-background/50 p-4 rounded-lg border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center transform transition-all hover:-translate-y-2 hover:border-primary hover:shadow-2xl hover:shadow-primary/30">
                 {dept.icon}
                 <h3 className="mt-4 font-bold text-lg text-foreground">{dept.name}</h3>
                 <p className="text-sm text-muted-foreground">{dept.description}</p>
@@ -95,7 +95,7 @@ export default function TentangKamiPage() {
 
         <section id="logo">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Filosofi Logo</h2>
-          <div className="bg-background/50 p-8 rounded-lg ring-1 ring-white/10 grid md:grid-cols-3 gap-8 items-center">
+          <div className="bg-background/50 p-8 rounded-lg border border-slate-200 dark:border-slate-800 grid md:grid-cols-3 gap-8 items-center">
             <div className="md:col-span-1 flex justify-center">
               <Image src="/images/himafortic-logo.png" alt="Logo Himafortic" width={200} height={200} className="object-contain" />
             </div>

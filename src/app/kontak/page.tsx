@@ -60,7 +60,7 @@ const socialLinks = [
 export default function KontakPage() {
   return (
     <div className="container mx-auto max-w-5xl py-12 px-4 sm:px-6 lg:px-8">
-      <article className="bg-card p-6 sm:p-8 rounded-2xl shadow-lg ring-1 ring-white/10">
+      <article className="bg-card p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
         <header className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
             Hubungi Kami
@@ -74,7 +74,7 @@ export default function KontakPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {socialLinks.map((social) => (
               <Link href={social.href} key={social.name} target="_blank" rel="noopener noreferrer" className="group">
-                <div className="bg-background/50 p-6 rounded-lg ring-1 ring-white/10 flex items-center space-x-4 transition-all duration-300 hover:ring-primary hover:shadow-2xl hover:shadow-primary/30 transform hover:-translate-y-1">
+                <div className="bg-background/50 p-6 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center space-x-4 transition-all duration-300 hover:border-primary hover:shadow-2xl hover:shadow-primary/30 transform hover:-translate-y-1">
                   <div className="text-primary transition-transform duration-300 group-hover:scale-110">
                     {social.icon}
                   </div>
@@ -89,7 +89,7 @@ export default function KontakPage() {
         </section>
 
         <section id="contact-info" className="mt-16 text-center">
-           <div className="bg-background/50 p-8 rounded-lg ring-1 ring-white/10">
+           <div className="bg-background/50 p-8 rounded-lg border border-slate-200 dark:border-slate-800">
              <MessageSquare className="h-12 w-12 text-secondary mx-auto mb-4"/>
              <h2 className="text-2xl font-bold text-foreground mb-2">Punya Pertanyaan atau Aspirasi?</h2>
              <p className="text-muted-foreground max-w-2xl mx-auto">

@@ -69,13 +69,13 @@ export default async function Home() {
         </div>
 
         {/* Floating Elements */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 animate-float-slow">
-          <div className="h-20 w-20 rounded-lg border bg-background/50 p-4 backdrop-blur-sm">
+        <div className="absolute top-[85%] left-4 -translate-y-1/2 md:top-1/2 md:left-1/4 animate-float-slow">
+          <div className="h-12 w-12 md:h-20 md:w-20 rounded-lg border bg-background/50 p-2 md:p-4 backdrop-blur-sm">
             <Trophy className="h-full w-full text-primary" />
           </div>
         </div>
-        <div className="absolute top-1/3 right-1/4 -translate-y-1/2 animate-float-slow animation-delay-500">
-          <div className="h-16 w-16 rounded-lg border bg-background/50 p-3 backdrop-blur-sm">
+        <div className="absolute top-[15%] right-4 -translate-y-1/2 md:top-1/3 md:right-1/4 animate-float-slow animation-delay-500">
+          <div className="h-10 w-10 md:h-16 md:w-16 rounded-lg border bg-background/50 p-2 md:p-3 backdrop-blur-sm">
             <Award className="h-full w-full text-secondary" />
           </div>
         </div>
